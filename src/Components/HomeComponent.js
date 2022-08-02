@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Home () {
 
@@ -20,7 +21,7 @@ function Home () {
                 <Card.Body>
                     <Card.Title>{recipe.dish.name}</Card.Title>
                     <Card.Text>Calories: {recipe.getTotalCalories}</Card.Text>
-                    <Button variant="primary">Details</Button>
+                    <Button variant="primary" tag ={Link} to ={"/recipes/" + recipe.id}>Click for more details</Button>
                 </Card.Body>
             </Card>
         )
