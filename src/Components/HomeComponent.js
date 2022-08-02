@@ -11,13 +11,19 @@ function Home () {
     useEffect(() => {
         console.log('test')
         // fetch data from db
+        fetch('/recipe')
+        .then(response => response.json())
+        .then( data => {
+            console.log(data)
+            setRecipes(data)
+        })
     }, [])
 
 
     const recipelist = recipes.map(recipe => {
         return (
             <Card key={recipe.id}>
-                <Card.Img variant="top" src= "#" />
+                <Card.Img variant="top" src= {recipe.image} />
                 <Card.Body>
                     <Card.Title>{recipe.dish.name}</Card.Title>
                     <Card.Text>Calories: {recipe.getTotalCalories}</Card.Text>

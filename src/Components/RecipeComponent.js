@@ -10,7 +10,7 @@ function Recipe(){
         dish: [],
         dateTime: '',
         ingredientList: [],
-        procedures: ''
+        procedures: []
     };
 
     const [recipe, setRecipe] = useState(emptyRecipe);
