@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useParams } from 'react-router-dom';
-import {Container, Row, Col, Image, ListGroup, ListGroupItem } from 'react-bootstrap';
+import {Image} from 'react-bootstrap';
 
 function Recipe(){
 

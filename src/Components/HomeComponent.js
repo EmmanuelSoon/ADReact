@@ -11,10 +11,10 @@ function Home () {
     useEffect(() => {
         console.log('test')
         // fetch data from db
-        fetch('/recipe')
+        fetch('/recipe/all')
         .then(response => response.json())
         .then( data => {
-            console.log(data)
+            // console.log(data)
             setRecipes(data)
         })
     }, [])
