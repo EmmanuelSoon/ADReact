@@ -83,11 +83,11 @@ function Recipe(){
         </div>
         <div className="row d-flex justify-content-center" >
             <div className='col-auto'>
-                <Image alt='placeholder' src= {process.env.PUBLIC_URL + '/asset/images/' + recipe.image} width="600" height='500'></Image>
+                <Image alt='placeholder' src= {process.env.PUBLIC_URL + '/asset/images/' + recipe.image} className="img-fluid border border-dark"></Image>
             </div>
         </div>
         <div className='row d-flex justify-content-around mt-5'>
-            <div className='col-4 offset-1 align-middle'>
+            <div className='col-12 col-md-4 offset-md-1 align-middle'>
                 <div>
                     <h3>Ingredients</h3>
                 </div>
@@ -95,7 +95,7 @@ function Recipe(){
                     {ingredients}
                 </ol>
             </div>
-            <div className='col-4 align-middle'>
+            <div className='col-12 col-md-4 align-middle'>
                 <div>
                     <h3>Nutritional Value</h3>
                     <ol>
@@ -104,7 +104,7 @@ function Recipe(){
                 </div>
             </div>
             <div className='row d-flex justify-content-center mt-5 pb-5 px-5'>
-                <div className='col-9 border p-3'>
+                <div className='col-12 col-md-9 border p-3'>
                     <h2 className= "mb-3">Procedure</h2>
                     <div>
                         {steps}
