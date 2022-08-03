@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, { useEffect, useState } from 'react'
+import { Image } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import {Image} from 'react-bootstrap';
 
 function Recipe(){
 
+    let {id} = useParams();
     const emptyRecipe = {
         id: 0,
         image: '',
@@ -11,10 +12,46 @@ function Recipe(){
         dish: [],
         dateTime: '',
         ingredientList: [],
-        procedures: []
+        procedures: [],
+        nutritionRecord: []
     };
 
     const [recipe, setRecipe] = useState(emptyRecipe);
+
+    useEffect(() => {
+        fetch(`/recipe/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data)
+            setRecipe(data)
+        })
+    }, [])
+
+
+    const nutritionalList = Object.keys(recipe.nutritionRecord).map(function(key,index) {
+        if(key === 'id') return
+        else if (key === 'servingSize') return 
+        else if (key === 'totalCalories') return
+        else {
+            return (
+                <li>{key.toUpperCase()} : {parseFloat(recipe.nutritionRecord[key]).toFixed(2)}</li>
+            )
+        }
+    })
+
+    const ingredients = recipe.ingredientList.map(weighted => {
+        return <li key={weighted.id}>{weighted.ingredient.name}: {weighted.weight}g</li>
+    })
+
+    const steps = recipe.procedures.map((currStep, index) => {
+        return(
+            <div className='mb-2'>
+                <span key={currStep.id}>
+                    <strong>Step {index + 1}:</strong> <br/> {currStep.detail}
+                </span> 
+            </div>
+        )
+    })
 
     return (
         <div className='container'>
@@ -22,24 +59,23 @@ function Recipe(){
         <div className="row mt-5 mb-5" >
             <div className="col-12 col-md-8">
                 <div className="my-5">
-                    <span>April 05, 2018</span>
-                    <h2>Vegetarian cheese salad</h2>
+                    <span>{recipe.dateTime.slice(0,10)}</span>
+                    <h2>{recipe.dish.name}</h2>
                     <div >
-                        <h6>Prep: 15 mins</h6>
-                        <h6>Cook: 30 mins</h6>
-                        <h6>Yields: 8 Servings</h6>
+                        <h6>Total Calories: {parseFloat(recipe.totalCalories).toFixed(2)}</h6>
+                        <h6>One Portion: {recipe.nutritionRecord.servingSize} grams </h6>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-4">
-                        <div class="text-right my-5">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star-o" aria-hidden="true"></i>
+            <div className="col-12 col-md-4">
+                        <div className="text-right my-5">
+                            <div className="ratings">
+                                <i className="fa fa-star" aria-hidden="true"></i>
+                                <i className="fa fa-star" aria-hidden="true"></i>
+                                <i className="fa fa-star" aria-hidden="true"></i>
+                                <i className="fa fa-star" aria-hidden="true"></i>
+                                <i className="fa fa-star-o" aria-hidden="true"></i>
                             </div>
                             <button className='btn btn-primary'>Add rating</button>
                         </div>
@@ -47,7 +83,7 @@ function Recipe(){
         </div>
         <div className="row d-flex justify-content-center" >
             <div className='col-auto'>
-                <Image alt='placeholder' src= {process.env.PUBLIC_URL + '/asset/images/placeholder.jpg'} width="600" height='500'></Image>
+                <Image alt='placeholder' src= {process.env.PUBLIC_URL + '/asset/images/' + recipe.image} width="600" height='500'></Image>
             </div>
         </div>
         <div className='row d-flex justify-content-around mt-5'>
@@ -56,30 +92,22 @@ function Recipe(){
                     <h3>Ingredients</h3>
                 </div>
                 <ol>
-                    <li>ingredient 1</li>
-                    <li>ingredient 1</li>
-                    <li>ingredient 1</li>
-                    <li>ingredient 1</li>
+                    {ingredients}
                 </ol>
             </div>
             <div className='col-4 align-middle'>
                 <div>
                     <h3>Nutritional Value</h3>
                     <ol>
-                        <li>ingredient 1: 100 cal</li>
-                        <li>ingredient 1: 100 cal</li>
-                        <li>ingredient 1: 100 cal</li>
-                        <li>ingredient 1: 100 cal</li>
+                        {nutritionalList}
                     </ol>
                 </div>
             </div>
             <div className='row d-flex justify-content-center mt-5 pb-5 px-5'>
                 <div className='col-9 border p-3'>
-                    <h2 className= "mb-5">Procedure</h2>
+                    <h2 className= "mb-3">Procedure</h2>
                     <div>
-                        step 1: asdasdasdasdadada. <br/>
-                        step 2: asasdasdadasdadad. <br/>
-                        step 3: adsdadadadadadadad. <br/>
+                        {steps}
                     </div>
                 </div>
 
