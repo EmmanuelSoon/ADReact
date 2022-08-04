@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Card, Button, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function Home () {
+function Home (props) {
 
     const [recipes, setRecipes] = useState([]);
 
