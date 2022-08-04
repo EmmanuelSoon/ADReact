@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Image } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
-function Recipe(){
+ function Recipe(){
 
     let {id} = useParams();
     const emptyRecipe = {
