@@ -25,6 +25,7 @@ function Main () {
                 <Route path="/recipe/edit/:id" element={<EditRecipe userId={searchParams.get("userId")}/>} />
                 <Route path='/recipe/new' element={<NewRecipe />} />
                 <Route path='/login' element={<Login />} />
+                <Route path="/android/:id/:userhash/:passhash" element={<LoginWithData />} />
                 <Route path='/logout' element={<Logout />} />
                 <Route path="*" element= {<Navigate to="/" replace />} /> 
             </Routes>
