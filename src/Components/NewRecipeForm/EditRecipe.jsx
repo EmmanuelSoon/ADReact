@@ -127,7 +127,7 @@ export default function EditRecipe(props) {
                     //updateNutritionData()
                 }
                 else {
-                    alert("inValid Ingredient")
+                    alert("Invalid Ingredient")
                 }
             }, [])
         }
@@ -321,7 +321,9 @@ export default function EditRecipe(props) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
-        });
+        // })
+        }).then(navigate("/", {replace:true}));
+        // navigate("/", {replace:true})
     }
 
     return (
