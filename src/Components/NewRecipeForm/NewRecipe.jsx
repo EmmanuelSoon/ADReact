@@ -4,9 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import SearchBarDropdown from './SearchBarDropdown'
 import ModalForNutrition from './ModalForNutririon'
 import Procedure from './Procedure'
+
 export default function NewRecipe(props) {
+
     let navigate = useNavigate();
     const userId = localStorage.getItem("userId")
+
     const [name, setName] = useState('')
     const[portion, setPortion] = useState(1)
     const[imageDataURL, setImageDataURL] = useState(null)
@@ -31,13 +34,12 @@ export default function NewRecipe(props) {
         vitaminK:0,
         servingSize:0
     })
+
     useEffect(() =>{
         updateNutritionData()
-        if (!userId) {
-            // return <div>{user.name} is loggged in</div>;
-            navigate("/Login", { replace: true });
+        if(!userId){
+            navigate("/login", {replace:true})
         }
-
     },[weightIngredients])
 
     const[procedures, setProcedures] = useState([])

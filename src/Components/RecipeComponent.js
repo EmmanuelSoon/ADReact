@@ -5,7 +5,6 @@ import { useParams, useLocation, Link } from 'react-router-dom';
  function Recipe(props){
 
     let {id} = useParams();
-    const location = useLocation();
     const emptyRecipe = {
         id: 0,
         image: '',
@@ -17,7 +16,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
         nutritionRecord: []
     };
 
-    const userId = location.state?.userId;
+    const userId = localStorage.getItem("userId")
     const [recipe, setRecipe] = useState(emptyRecipe);
     const [isUser, setIsUser] = useState(false);
     const [nutritions, setNutritions] = useState({

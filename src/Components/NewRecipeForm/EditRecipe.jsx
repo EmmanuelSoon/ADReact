@@ -54,11 +54,14 @@ export default function EditRecipe(props) {
     useEffect(() => {
         fetch(`/recipe/${id}`)
         .then(response => response.json())
-        .then(data => {
+        .then(async data => {
             console.log(data)
+            if(parseInt(userId) !== data.user.id){
+                navigate("/", {replace:true})
+            }
+            await setProcedures([])
             setRecipe(data)
         })
-        setProcedures([])
     }, [])
 
 
@@ -80,7 +83,7 @@ export default function EditRecipe(props) {
     }
 
     useEffect(()=>{
-        setName(recipe.dish.name)
+        setName(recipe.name)
         setPortion(recipe.portion)
         setImageDataURL(recipe.image)
         setWeightIngredient(recipe.ingredientList)
@@ -88,9 +91,6 @@ export default function EditRecipe(props) {
             let proc = procedures
             proc.push(step.detail)
             setProcedures(proc)
-            // console.log(step.detail)
-            // addProcedure(step.detail)
-            // console.log(procedures)
         })
     }, [recipe])
 
@@ -112,7 +112,6 @@ export default function EditRecipe(props) {
 
     const addIngredient = (id) => {
         if(weightIngredients.findIndex(item => item.ingredient.id == id) >= 0){
-            //console.log("existed")
         }
         else{
             //console.log("add")
@@ -123,7 +122,6 @@ export default function EditRecipe(props) {
                     setWeightIngredient(
                         [...weightIngredients,{ingredient:data, weight:1}]
                     )
-                    //updateNutritionData()
                 }
                 else {
                     alert("Invalid Ingredient")
@@ -324,6 +322,8 @@ export default function EditRecipe(props) {
         }).then(navigate("/", {replace:true}));
         // navigate("/", {replace:true})
     }
+
+
 
     return (
         <div className='container mt-2 mb-2'>

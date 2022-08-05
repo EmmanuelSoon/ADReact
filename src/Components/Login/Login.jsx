@@ -1,5 +1,5 @@
 import React, { useState ,useEffect} from "react";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Login() {
@@ -16,7 +16,7 @@ export default function Login() {
             username:username,
             password:password
         }
-        console.log(userInput)
+        
         fetch('/recipe/checkuser', {
             method: 'POST',
             headers: {
@@ -28,9 +28,10 @@ export default function Login() {
                 if(res.ok){
                     let data = await res.json()
                     setErrorMsg("")
+                    // console.log(data)
                     setUserId(data.id)
                     localStorage.setItem('userId', data.id)
-
+                    
                 }
                 else {
                     setErrorMsg("Invalid username or password!")
@@ -54,18 +55,18 @@ export default function Login() {
         <div className="container">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
-                    <h2 className="text-center text-muted mt-5"><strong>User Login Page</strong></h2>
+                    <h2 className="text-center text-muted mt-5"><strong>Login Here</strong></h2>
                     <div className="card my-3">
                     <form className="card-body cardbody-color p-lg-5" onSubmit={handleSubmit} method="post">
-                        <div className="text-center">
-                        <img src={process.env.PUBLIC_URL + '/asset/images/placeholder.jpg'} className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-                            width="200px" alt="profile"/>
+                        <div className="text-center mb-5">
+                            <img src={process.env.PUBLIC_URL + '/asset/images/placeholder.jpg'} className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                                width="200px" alt="profile"/>
                         </div>
                         <div className="mb-3">
-                            <input type="text" name="username" id="username" value={username} onChange={e => setUsername(e.target.value)} placeholder="User Name"/>            
+                            <input className="form-control" type="text" name="username" id="username" value={username} onChange={e => setUsername(e.target.value)} placeholder="User Name"/>            
                         </div>
                         <div className="mb-3">
-                            <input type="password" name="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />            
+                            <input className="form-control" type="password" name="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />            
                         </div>
                         <div>
                             <p className="text-danger"> {errorMsg} </p>

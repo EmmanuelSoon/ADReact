@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
 import {Navbar,  Nav, Button, Container} from 'react-bootstrap';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+
+
+
+function handleLogOut(){
+    localStorage.clear();
+    window.location.reload(true);
+    //this.props.location.push("http://localhost:8080")
+}
 
 function Header(){
+
 
     return(
         <React.Fragment>
                 <Navbar variant = "light" expand="md" collapseOnSelect className='border-bottom'> 
 
                     <Container>
-                        <Navbar.Brand href="#home">
-                        <img src={process.env.PUBLIC_URL + '/asset/images/placeholder.jpg'} height="40" width="41"
-                                alt="blank" />
-                            Henry's Recipes
+                        <Navbar.Brand>
+                            <NavLink className="nav-link" to={'/'}>
+                                <img src={process.env.PUBLIC_URL + '/asset/images/placeholder.jpg'} height="40" width="41" className="rounded-circle"
+                                    alt="blank" />
+                                &ensp; Henry's Recipes
+                            </NavLink>
                             </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/recipes">All Recipes</Nav.Link>
-                            <Nav.Link href='/recipe/new'>Add new Recipe</Nav.Link>
+                                <NavLink className="nav-link" to={'/'}>All Recipes</NavLink>
+                                <NavLink className="nav-link" to={'/recipe/new'}>Add new Recipe</NavLink>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="/logout">Log out</Nav.Link>
+                            <NavLink className="nav-link" to={'/logout'}>Logout</NavLink>
                         </Nav>
                         </Navbar.Collapse>
                     </Container>

@@ -47,10 +47,8 @@
   object-fit: cover;
 }
 
-.card{
-  height: 10cm;
-}
 
 .cardbody-color{
   background-color: #ebf2fa;
+  height: 15cm;
 }
