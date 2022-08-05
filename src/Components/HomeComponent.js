@@ -27,9 +27,9 @@ const [recipes, setRecipes] = useState([]);
                         <Card.Text className='lead'>
                             Created By: {recipe.user.name}<span className='float-end text-muted'>{recipe.dateTime.slice(0,10)}</span><br/>
                             Number of Steps: {recipe.procedures.length} <br/> 
-                            {parseFloat(recipe.dish.calorie).toFixed(0)} calories! 
+                            {parseFloat(recipe.calPerServing).toFixed(0)} calories Per Serving! 
                         </Card.Text>
-                        <Link to ={"/recipes/" + recipe.id} state={{recipe}}>
+                        <Link to ={"/recipes/" + recipe.id} state={{userId: props.userId}}>
                             <Button>Click for more details</Button>
                         </Link>
                     </Card.Body>
