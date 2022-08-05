@@ -202,7 +202,7 @@ export default function EditRecipe(props) {
         return (
             <div>
                 <table className='table'>
-                    <thead><tr><th>Nutrition Info</th><th>Value</th></tr></thead>
+                    <thead><tr><th>Nutritional Info</th><th>Value</th></tr></thead>
                     <tbody>
                         <tr><td>Calories</td><td>{nutritions.calories.toFixed(2)} kcal</td></tr>
                         <tr><td>Protein</td><td>{nutritions.proteins.toFixed(2)} g</td></tr>
@@ -230,11 +230,11 @@ export default function EditRecipe(props) {
         return(
             <div>
                 <div className='row'>
-                    <p className='mt-2'><strong>Serving Weight  {nutritions.servingSize} g</strong></p>
+                    <p className='mt-2'><strong><u>Serving Weight: {nutritions.servingSize} g</u></strong></p>
                 </div>
                 <div className='row'>
                     <table className='table'>
-                        <thead><tr><th>Nutrition Info</th><th>Value</th></tr></thead>
+                        <thead><tr><th>Nutritional Info</th><th>Value</th></tr></thead>
                         <tbody>
                             <tr><td>Calories</td><td>{nutritions.calories.toFixed(2)} kcal</td></tr>
                             <tr><td>Protein</td><td>{nutritions.proteins.toFixed(2)} g</td></tr>
@@ -247,7 +247,7 @@ export default function EditRecipe(props) {
                     </table>
                 </div>
                 <div className='row col-6 ms-auto'>
-                    <button className='btn btn-primary' onClick={() => {setShow(true)}}>See Full Nutritional Info...</button>
+                    <button className='btn btn-primary' onClick={() => {setShow(true)}}>Full Nutritional Information</button>
                 </div>    
             </div>
         )
@@ -327,74 +327,83 @@ export default function EditRecipe(props) {
 
     return (
         <div className='container mt-2 mb-2'>
-            <ModalForNutrition show = {show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
-            <form method='PUT' onSubmit={handleSubmit}>
-                <h2>Edit Recipe!</h2>
-                <div className='row'>
-                    <div className='col-12'>
-                        Recipe Name:
-                    </div>
-                    <div className='col-12'>
-                        <input type="text" onChange={(event) => {setName(event.target.value)}} value={name}></input>
-                    </div>
+        <ModalForNutrition show = {show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
+        <form method='post' onSubmit={handleSubmit}>
+            <h2>Edit Your Recipe!</h2>
+            <div className='row mt-2 mb-2'>
+                <div className='col-12'>
+                    <input className='form-control mt-2 mb-2' placeholder="Recipe Name"
+                        type="text" onChange={(event) => {setName(event.target.value)}} value={name}/>
                 </div>
-                <h3>Add the Ingredients into Recipe</h3>
-                    <SearchBarDropdown addIngredient={addIngredient}/>
-                <div className='row'>
-                    <div className='col-sm-12 col-md-7'>
-                        <table className='table'>
-                            <thead>
-                                <tr>
-                                    <th>Ingredient Name</th>
-                                    <th>Ingredient Weight</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {weightIngredientsList}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className='col-sm-12 col-md-5'>
-                        {mainNutritionInfo()}
-                    </div>
+            </div>
+            <h3>Add Ingredients</h3>
+            <div className='row mt-2 mb-2'>
+                <SearchBarDropdown addIngredient={addIngredient}/>
+            </div>
+            <div className='row'>
+                <div className='col-12 col-md-7'>
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <th>Ingredient Name</th>
+                                <th>Ingredient Weight</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {weightIngredientsList}
+                        </tbody>
+                    </table>
                 </div>
-                <div className='row col-12'>
-                    <h2>Your Recipe Procedures</h2>
+                <div className='col-12 col-md-5'>
+                    {mainNutritionInfo()}
                 </div>
-                <div className='row'>
+            </div>
+            <div className='row'>
+                <div className='col-12'>
+                    <h2>Recipe Procedures</h2>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-12'>
                     <ul>
                         {storedProcedures}
                     </ul>
                 </div>
-                <div>
+            </div>
+            <div className='row'>
+                <div className='col-12'>
                     <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
                 </div>
-                <div className='row mt-2 mb-2'>
-                    <div className='col-6 col-sm-3'>
-                        <h4>Select the portion:</h4>
-                    </div>
-                    <div className='col-6 col-sm-3'>
-                        <input type="number" min={1} value={portion} onChange={(event) => setPortion(event.target.value)}/>
-                    </div>
-                </div>  
-                <div className='row mt-2 mb-2'>
-                    {/* <div className='col-6 col-sm-3'>
-                        <h4>Upload Photo:</h4>
-                    </div> */}
-                    {/* <div className='col-6 col-sm-3'>
-                        <input type="file" onChange={imageHandler} accept="image/*" title=" "/>
-                    </div> */}
+            </div>
+            <div className='row mt-4 mb-4'>
+                <div className='col-12 col-sm-3'>
+                    <h4>Select Number of Servings:</h4>
                 </div>
-                <div className=' row col-12 col-sm-2 ms-auto'>
-                    <button className='btn btn-primary btn-block' type='submit'>Submit Recipe</button>
+                <div className='col-12 col-sm-3'>
+                    <input className='form-control border' type="number" min={1} value={portion} onChange={(event) => setPortion(event.target.value)}/>
                 </div>
-                <div className='row'>
-                    <div>
-                        <canvas id="imageCanvas"></canvas>
-                    </div>
-                </div>   
-            </form>
-        </div>
+            </div>  
+            {/* <div className='row mt-2 mb-2'>
+                <div className='col-12 col-sm-3'>
+                    <h4>Upload Photo:</h4>
+                </div>
+                <div className='col-12 col-sm-3'>
+                    <input type="file" onChange={imageHandler} accept="image/*" title=" "/>
+                </div>
+            </div> */}
+            
+            <div className='row'>
+                <div className='col-12 ms-auto text-right'>
+                    <button className='btn btn-primary float-end' type='submit'>Submit Recipe</button>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-11'>
+                    <canvas id="imageCanvas"></canvas>
+                </div>
+            </div>   
+       </form>
+    </div>
   )
 }

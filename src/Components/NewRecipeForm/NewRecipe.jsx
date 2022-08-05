@@ -159,7 +159,7 @@ export default function NewRecipe(props) {
         return (
             <div>
                 <table className='table'>
-                    <thead><tr><th>Nutrition Info</th><th>Value</th></tr></thead>
+                    <thead><tr><th>Nutritional Info</th><th>Value</th></tr></thead>
                     <tbody>
                         <tr><td>Calories</td><td>{nutritions.calories.toFixed(2)} kcal</td></tr>
                         <tr><td>Protein</td><td>{nutritions.proteins.toFixed(2)} g</td></tr>
@@ -187,12 +187,12 @@ export default function NewRecipe(props) {
             <div>
                 <div className='col-12'>
                     <div>
-                        <p className='mt-2'><strong>Serving Weight  {nutritions.servingSize} g</strong></p>
+                        <p className='mt-2'><strong><u>Serving Weight:  {nutritions.servingSize} g</u></strong></p>
                     </div>
                 </div>
                 <div className='col-12'>
                     <table className='table'>
-                        <thead><tr><th>Nutrition Info</th><th>Value</th></tr></thead>
+                        <thead><tr><th>Nutritional Info</th><th>Value</th></tr></thead>
                         <tbody>
                             <tr><td>Calories</td><td>{nutritions.calories.toFixed(2)} kcal</td></tr>
                             <tr><td>Protein</td><td>{nutritions.proteins.toFixed(2)} g</td></tr>
@@ -205,7 +205,7 @@ export default function NewRecipe(props) {
                     </table>
                 </div>
                 <div className='col-6 ms-auto'>
-                    <button className='btn btn-primary float-end' onClick={() => {setShow(true)}}>See Full Nutritional Info...</button>
+                    <button className='btn btn-primary float-end' onClick={() => {setShow(true)}}>Full Nutritional Information</button>
                 </div>    
             </div>
         )
@@ -294,7 +294,7 @@ export default function NewRecipe(props) {
                     type="text" onChange={(event) => {setName(event.target.value)}} value={name}/>
             </div>
         </div>
-        <h3>Add the Ingredients into Recipe</h3>
+        <h3>Add Ingredients</h3>
         <div className='row mt-2 mb-2'>
             <SearchBarDropdown addIngredient={addIngredient}/>
         </div>
@@ -319,7 +319,7 @@ export default function NewRecipe(props) {
         </div>
         <div className='row'>
             <div className='col-12'>
-                <h2>Submit your Recipe Procedures</h2>
+                <h2>Recipe Procedures</h2>
             </div>
         </div>
         <div className='row'>
@@ -335,18 +335,18 @@ export default function NewRecipe(props) {
             </div>
         </div>
         <div className='row mt-4 mb-4'>
-            <div className='col-5 col-sm-3'>
-                <h4>Select the portion:</h4>
+            <div className='col-12 col-sm-3'>
+                <h4>Select Number of Servings :</h4>
             </div>
-            <div className='col-5 col-sm-3'>
-                <input type="number" min={1} value={portion} onChange={(event) => setPortion(event.target.value)}/>
+            <div className='col-12 col-sm-3'>
+                <input className='form-control border' type="number" min={1} value={portion} onChange={(event) => setPortion(event.target.value)}/>
             </div>
         </div>  
         <div className='row mt-2 mb-2'>
-            <div className='col-5 col-sm-3'>
+            <div className='col-12 col-sm-3'>
                 <h4>Upload Photo:</h4>
             </div>
-            <div className='col-5 col-sm-3'>
+            <div className='col-12 col-sm-3'>
                 <input type="file" onChange={imageHandler} accept="image/*" title=" "/>
             </div>
         </div>
