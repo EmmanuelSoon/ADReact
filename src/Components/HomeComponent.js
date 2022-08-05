@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 function Home (props) {
 
 const [recipes, setRecipes] = useState([]);
-
-
     // works like componentDidMount
     useEffect(() => {
         // fetch data from db

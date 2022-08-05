@@ -1,10 +1,12 @@
 import React, { useState ,useEffect} from 'react'
+import {useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import SearchBarDropdown from './SearchBarDropdown'
 import ModalForNutrition from './ModalForNutririon'
 import Procedure from './Procedure'
 export default function NewRecipe(props) {
-    const {userId} = props
+    let navigate = useNavigate();
+    const userId = localStorage.getItem("userId")
     const [name, setName] = useState('')
     const[portion, setPortion] = useState(1)
     const[imageDataURL, setImageDataURL] = useState(null)
@@ -31,8 +33,13 @@ export default function NewRecipe(props) {
     })
     useEffect(() =>{
         updateNutritionData()
+        if (!userId) {
+            // return <div>{user.name} is loggged in</div>;
+            navigate("/Login", { replace: true });
+        }
+
     },[weightIngredients])
-    
+
     const[procedures, setProcedures] = useState([])
     const addProcedure = (detail) => {
         if (detail.length > 0) {
@@ -265,23 +272,27 @@ export default function NewRecipe(props) {
             },
             body: JSON.stringify(formData)
         });
-
+        
     }
+
+    // if (!userId) {
+    //     // return <div>{user.name} is loggged in</div>;
+    //     navigate("/Login", { replace: true });
+    // }
   return (
     <div className='container mt-2 mb-2'>
         <ModalForNutrition show = {show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
         <form method='post' onSubmit={handleSubmit}>
         <h2>Create Your Recipe!</h2>
-        <div className='row'>
-            <div className='col-12'>
-                Recipe Name:
-            </div>
-            <div className='col-12'>
-                <input type="text" onChange={(event) => {setName(event.target.value)}} value={name}></input>
-            </div>
+        <div className='row mt-2 mb-2'>
+            <div className='col-12'>Recipe Name:</div>
+            <input className='col-12 form-control mt-2 mb-2' placeholder="Reciple Title..."
+                type="text" onChange={(event) => {setName(event.target.value)}} value={name}/>
         </div>
         <h3>Add the Ingredients into Recipe</h3>
+        <div className='row mt-2 mb-2'>
             <SearchBarDropdown addIngredient={addIngredient}/>
+        </div>
         <div className='row'>
             <div className='col-sm-12 col-md-7'>
                 <table className='table'>
@@ -328,7 +339,8 @@ export default function NewRecipe(props) {
                 <input type="file" onChange={imageHandler} accept="image/*" title=" "/>
             </div>
         </div>
-        <div className=' row col-12 col-sm-2 ms-auto'>
+        
+        <div className='row col-12 col-sm-2 ms-auto'>
             <button className='btn btn-primary btn-block' type='submit'>Submit Recipe</button>
         </div>
         <div className='row'>
