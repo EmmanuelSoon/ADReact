@@ -127,7 +127,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
             <div className="col-12 col-md-8">
                 <div className="my-5">
                     <span className='text-muted'>{recipe.dateTime.slice(0,10)}</span>
-                    <h2>{recipe.dish.name}</h2>
+                    <h2>{recipe.name}</h2>
                     <div >
                         <h6>Total Calories: {parseFloat(recipe.totalCalories).toFixed(0)} Kcal</h6>
                         <h6>One Portion: {recipe.nutritionRecord.servingSize} grams </h6>
@@ -150,7 +150,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
         </div>
         <div className="row d-flex justify-content-center" >
             <div className='col-auto'>
-                <Image alt='placeholder' src= {process.env.PUBLIC_URL + '/asset/images/' + recipe.image} className="img-fluid border border-dark"></Image>
+                <Image alt='placeholder' src= {recipe.image} className="img-fluid border border-dark"></Image>
             </div>
         </div>
         <div className='row d-flex justify-content-around mt-5'>

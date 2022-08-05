@@ -254,7 +254,7 @@ export default function NewRecipe(props) {
             } 
         }
     }
-     const handleSubmit = (event) => {
+     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = {
             name:name,
@@ -264,7 +264,7 @@ export default function NewRecipe(props) {
             image:imageDataURL,
             userId:userId
         }
-        fetch('/recipe/new', {
+        await fetch('/recipe/new', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -272,7 +272,7 @@ export default function NewRecipe(props) {
             },
             body: JSON.stringify(formData)
         });
-        
+        navigate("/")
     }
 
     // if (!userId) {
