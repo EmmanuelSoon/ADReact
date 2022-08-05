@@ -22,7 +22,7 @@ export default function SearchBarDropdown(props) {
             fetch(`/recipe/ingredients`)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                //console.log(data)
                 setFoods(data)
             }, [])
         }
@@ -42,7 +42,7 @@ export default function SearchBarDropdown(props) {
         setDisable(false)
         setSelect(food.id)
         const num = select
-        console.log(num)
+        //console.log(num)
     }
     useEffect(() => {
         inputRef.current.addEventListener('click', (event) => {
@@ -65,16 +65,15 @@ export default function SearchBarDropdown(props) {
     })
     return (
         <div className='row'>
-            <div className="search-bar-dropdown col-12 col-sm-9">
+            <div className="search-bar-dropdown col-10">
                 <input id="search-bar" type="text" className="form-control" 
                     placeholder="Search Ingredient..." onChange={onInputChange} ref={inputRef}/>
                 <ul id="results" className='list-group' ref={ulRef}>
                     {foodlist}
                 </ul>
             </div>
-            <div className='col-12 col-sm-3'>
-                <button className='btn btn-primary' onClick={onAdd} disabled={disable}>Add</button>
-            </div>
+            
+            <button className='col-2 btn btn-primary' onClick={onAdd} disabled={disable}>Add</button>
         </div>
     )
 }
