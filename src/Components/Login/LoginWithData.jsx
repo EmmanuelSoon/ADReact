@@ -24,12 +24,7 @@ export default function LoginWithData() {
           .then(async res => {
             if(res.ok){
               let data = await res.json()
-
-              // localStorage.setItem('user', JSON.stringify(data))
               localStorage.setItem('userId', data.id)
-              //console.log("after", data.id)
-              //let data2 = JSON.parse(localStorage.getItem('user'))
-              console.log("getItem", localStorage.getItem('userId'))
           }
             else{
                     //bring user to login page

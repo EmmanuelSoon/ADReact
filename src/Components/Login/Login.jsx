@@ -1,11 +1,15 @@
 import React, { useState ,useEffect} from "react";
 import {useNavigate } from 'react-router-dom';
+
+
 export default function Login() {
     let navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [userId, setUserId] = useState(null)
     const [errorMsg, setErrorMsg] = useState("")
+
+
     const handleSubmit = async e => {
         e.preventDefault();
         const userInput={
@@ -25,14 +29,11 @@ export default function Login() {
                     let data = await res.json()
                     setErrorMsg("")
                     setUserId(data.id)
-                    // localStorage.setItem('user', JSON.stringify(data))
                     localStorage.setItem('userId', data.id)
-                    //console.log("after", data.id)
-                    //let data2 = JSON.parse(localStorage.getItem('user'))
-                    console.log("getItem", localStorage.getItem('userId'))
+
                 }
                 else {
-                    setErrorMsg("UserName And PassWord are not matching!")
+                    setErrorMsg("Invalid username or password!")
                 }
             })
     };
@@ -56,10 +57,10 @@ export default function Login() {
                     <h2 className="text-center text-muted mt-5"><strong>User Login Page</strong></h2>
                     <div className="card my-3">
                     <form className="card-body cardbody-color p-lg-5" onSubmit={handleSubmit} method="post">
-                        {/* <div className="text-center">
-                        <img src={logo} className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                        <div className="text-center">
+                        <img src={process.env.PUBLIC_URL + '/asset/images/placeholder.jpg'} className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                             width="200px" alt="profile"/>
-                        </div> */}
+                        </div>
                         <div className="mb-3">
                             <input type="text" name="username" id="username" value={username} onChange={e => setUsername(e.target.value)} placeholder="User Name"/>            
                         </div>

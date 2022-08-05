@@ -17,7 +17,7 @@ function Header(){
                         <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/recipes">All Recipes</Nav.Link>
-                            <Nav.Link href="#addrecipes">Add new Recipe</Nav.Link>
+                            <Nav.Link href='/recipe/new'>Add new Recipe</Nav.Link>
                         </Nav>
                         <Nav>
                             <Nav.Link href="/logout">Log out</Nav.Link>

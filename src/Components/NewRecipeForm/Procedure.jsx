@@ -23,14 +23,17 @@ export default function Procedure(props) {
     return (
         <div>
             <div className='row'>
-                <textarea rows="3" cols="50" placeholder="Add recipe steps here"
-                    id="input-procedure" value={message}
-                    onChange={handleMessageChange}>
-                </textarea>
+
+                    <textarea rows="3" placeholder="Add recipe steps here"
+                        id="input-procedure" value={message}
+                        onChange={handleMessageChange}>
+                    </textarea>
+                
+
             </div>     
-            <div className='row col-2 ms-auto mt-2 mb-2'>
-                <button className='btn btn-primary' disabled={disable} 
-                    onClick={handleSubmit}>Add</button>
+            <div className='col-12 ms-auto mt-2 mb-2'>
+                <button className='btn btn-primary float-end' disabled={disable} 
+                    onClick={handleSubmit}>Add Step</button>
             </div>
         </div>
     )

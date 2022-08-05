@@ -183,10 +183,12 @@ export default function NewRecipe(props) {
     const mainNutritionInfo = () => {
         return(
             <div>
-                <div className='row'>
-                    <p className='mt-2'><strong>Serving Weight  {nutritions.servingSize} g</strong></p>
+                <div className='col-12'>
+                    <div>
+                        <p className='mt-2'><strong>Serving Weight  {nutritions.servingSize} g</strong></p>
+                    </div>
                 </div>
-                <div className='row'>
+                <div className='col-12'>
                     <table className='table'>
                         <thead><tr><th>Nutrition Info</th><th>Value</th></tr></thead>
                         <tbody>
@@ -200,8 +202,8 @@ export default function NewRecipe(props) {
                         </tbody>
                     </table>
                 </div>
-                <div className='row col-6 ms-auto'>
-                    <button className='btn btn-primary' onClick={() => {setShow(true)}}>See Full Nutritional Info...</button>
+                <div className='col-6 ms-auto'>
+                    <button className='btn btn-primary float-end' onClick={() => {setShow(true)}}>See Full Nutritional Info...</button>
                 </div>    
             </div>
         )
@@ -285,16 +287,17 @@ export default function NewRecipe(props) {
         <form method='post' onSubmit={handleSubmit}>
         <h2>Create Your Recipe!</h2>
         <div className='row mt-2 mb-2'>
-            <div className='col-12'>Recipe Name:</div>
-            <input className='col-12 form-control mt-2 mb-2' placeholder="Reciple Title..."
-                type="text" onChange={(event) => {setName(event.target.value)}} value={name}/>
+            <div className='col-12'>
+                <input className='form-control mt-2 mb-2' placeholder="Recipe Name"
+                    type="text" onChange={(event) => {setName(event.target.value)}} value={name}/>
+            </div>
         </div>
         <h3>Add the Ingredients into Recipe</h3>
         <div className='row mt-2 mb-2'>
             <SearchBarDropdown addIngredient={addIngredient}/>
         </div>
         <div className='row'>
-            <div className='col-sm-12 col-md-7'>
+            <div className='col-12 col-md-7'>
                 <table className='table'>
                     <thead>
                         <tr>
@@ -308,43 +311,51 @@ export default function NewRecipe(props) {
                     </tbody>
                 </table>
             </div>
-            <div className='col-sm-12 col-md-5'>
+            <div className='col-12 col-md-5'>
                 {mainNutritionInfo()}
             </div>
         </div>
-        <div className='row col-12'>
-            <h2>Submit your Recipe Procedures</h2>
+        <div className='row'>
+            <div className='col-12'>
+                <h2>Submit your Recipe Procedures</h2>
+            </div>
         </div>
         <div className='row'>
-            <ul>
-                {storedProcedures}
-            </ul>
+            <div className='col-12'>
+                <ul>
+                    {storedProcedures}
+                </ul>
+            </div>
         </div>
-        <div>
-            <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
+        <div className='row'>
+            <div className='col-12'>
+                <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
+            </div>
         </div>
-        <div className='row mt-2 mb-2'>
-            <div className='col-6 col-sm-3'>
+        <div className='row mt-4 mb-4'>
+            <div className='col-5 col-sm-3'>
                 <h4>Select the portion:</h4>
             </div>
-            <div className='col-6 col-sm-3'>
+            <div className='col-5 col-sm-3'>
                 <input type="number" min={1} value={portion} onChange={(event) => setPortion(event.target.value)}/>
             </div>
         </div>  
         <div className='row mt-2 mb-2'>
-            <div className='col-6 col-sm-3'>
+            <div className='col-5 col-sm-3'>
                 <h4>Upload Photo:</h4>
             </div>
-            <div className='col-6 col-sm-3'>
+            <div className='col-5 col-sm-3'>
                 <input type="file" onChange={imageHandler} accept="image/*" title=" "/>
             </div>
         </div>
         
-        <div className='row col-12 col-sm-2 ms-auto'>
-            <button className='btn btn-primary btn-block' type='submit'>Submit Recipe</button>
+        <div className='row'>
+            <div className='col-12 ms-auto text-right'>
+                <button className='btn btn-primary float-end' type='submit'>Submit Recipe</button>
+            </div>
         </div>
         <div className='row'>
-            <div>
+            <div className='col-11'>
                 <canvas id="imageCanvas"></canvas>
             </div>
         </div>   

@@ -7,9 +7,8 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function EditRecipe(props) {
-    const location = useLocation();
     const navigate = useNavigate();
-    const userId = location.state?.userId;
+    const userId = localStorage.getItem("userId")
 
     let {id} = useParams();
 
@@ -330,72 +329,72 @@ export default function EditRecipe(props) {
         <div className='container mt-2 mb-2'>
             <ModalForNutrition show = {show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
             <form method='PUT' onSubmit={handleSubmit}>
-            <h2>Edit Recipe!</h2>
-            <div className='row'>
-                <div className='col-12'>
-                    Recipe Name:
+                <h2>Edit Recipe!</h2>
+                <div className='row'>
+                    <div className='col-12'>
+                        Recipe Name:
+                    </div>
+                    <div className='col-12'>
+                        <input type="text" onChange={(event) => {setName(event.target.value)}} value={name}></input>
+                    </div>
                 </div>
-                <div className='col-12'>
-                    <input type="text" onChange={(event) => {setName(event.target.value)}} value={name}></input>
+                <h3>Add the Ingredients into Recipe</h3>
+                    <SearchBarDropdown addIngredient={addIngredient}/>
+                <div className='row'>
+                    <div className='col-sm-12 col-md-7'>
+                        <table className='table'>
+                            <thead>
+                                <tr>
+                                    <th>Ingredient Name</th>
+                                    <th>Ingredient Weight</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {weightIngredientsList}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className='col-sm-12 col-md-5'>
+                        {mainNutritionInfo()}
+                    </div>
                 </div>
-            </div>
-            <h3>Add the Ingredients into Recipe</h3>
-                <SearchBarDropdown addIngredient={addIngredient}/>
-            <div className='row'>
-                <div className='col-sm-12 col-md-7'>
-                    <table className='table'>
-                        <thead>
-                            <tr>
-                                <th>Ingredient Name</th>
-                                <th>Ingredient Weight</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {weightIngredientsList}
-                        </tbody>
-                    </table>
+                <div className='row col-12'>
+                    <h2>Your Recipe Procedures</h2>
                 </div>
-                <div className='col-sm-12 col-md-5'>
-                    {mainNutritionInfo()}
+                <div className='row'>
+                    <ul>
+                        {storedProcedures}
+                    </ul>
                 </div>
-            </div>
-            <div className='row col-12'>
-                <h2>Your Recipe Procedures</h2>
-            </div>
-            <div className='row'>
-                <ul>
-                    {storedProcedures}
-                </ul>
-            </div>
-            <div>
-                <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
-            </div>
-            <div className='row mt-2 mb-2'>
-                <div className='col-6 col-sm-3'>
-                    <h4>Select the portion:</h4>
-                </div>
-                <div className='col-6 col-sm-3'>
-                    <input type="number" min={1} value={portion} onChange={(event) => setPortion(event.target.value)}/>
-                </div>
-            </div>  
-            <div className='row mt-2 mb-2'>
-                {/* <div className='col-6 col-sm-3'>
-                    <h4>Upload Photo:</h4>
-                </div> */}
-                {/* <div className='col-6 col-sm-3'>
-                    <input type="file" onChange={imageHandler} accept="image/*" title=" "/>
-                </div> */}
-            </div>
-            <div className=' row col-12 col-sm-2 ms-auto'>
-                <button className='btn btn-primary btn-block' type='submit'>Submit Recipe</button>
-            </div>
-            <div className='row'>
                 <div>
-                    <canvas id="imageCanvas"></canvas>
+                    <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
                 </div>
-            </div>   
-        </form>
+                <div className='row mt-2 mb-2'>
+                    <div className='col-6 col-sm-3'>
+                        <h4>Select the portion:</h4>
+                    </div>
+                    <div className='col-6 col-sm-3'>
+                        <input type="number" min={1} value={portion} onChange={(event) => setPortion(event.target.value)}/>
+                    </div>
+                </div>  
+                <div className='row mt-2 mb-2'>
+                    {/* <div className='col-6 col-sm-3'>
+                        <h4>Upload Photo:</h4>
+                    </div> */}
+                    {/* <div className='col-6 col-sm-3'>
+                        <input type="file" onChange={imageHandler} accept="image/*" title=" "/>
+                    </div> */}
+                </div>
+                <div className=' row col-12 col-sm-2 ms-auto'>
+                    <button className='btn btn-primary btn-block' type='submit'>Submit Recipe</button>
+                </div>
+                <div className='row'>
+                    <div>
+                        <canvas id="imageCanvas"></canvas>
+                    </div>
+                </div>   
+            </form>
         </div>
   )
 }
