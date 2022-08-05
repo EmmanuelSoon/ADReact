@@ -20,7 +20,7 @@ function Header(){
                             <Nav.Link href="#addrecipes">Add new Recipe</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#temp">Log out</Nav.Link>
+                            <Nav.Link href="/logout">Log out</Nav.Link>
                         </Nav>
                         </Navbar.Collapse>
                     </Container>
