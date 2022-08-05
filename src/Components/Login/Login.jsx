@@ -48,7 +48,7 @@ export default function Login() {
 
     if (userId) {
         //return <div>{userId} is loggged in</div>;
-        navigate("/recipe/new", { replace: true });
+        navigate("/", { replace: true });
     }
     return (
         <div className="container">

@@ -21,9 +21,10 @@ const [recipes, setRecipes] = useState([]);
         return (
             <div>
                 <Card key={recipe.id}>
-                    <Card.Img variant="top" src= {process.env.PUBLIC_URL + "/asset/images/" + recipe.image}  height="300px" style={{objectFit: "cover"}}/>
+                {/* process.env.PUBLIC_URL + "/asset/images/" +  */}
+                    <Card.Img variant="top" src= {recipe.image}  height="300px" style={{objectFit: "cover"}}/>
                     <Card.Body>
-                        <Card.Title className='lead'><strong>{recipe.dish.name}</strong></Card.Title>
+                        <Card.Title className='lead'><strong>{recipe.name}</strong></Card.Title>
                         <Card.Text className='lead'>
                             Created By: {recipe.user.name}<span className='float-end text-muted'>{recipe.dateTime.slice(0,10)}</span><br/>
                             Number of Steps: {recipe.procedures.length} <br/> 

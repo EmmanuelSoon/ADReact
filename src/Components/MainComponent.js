@@ -13,10 +13,9 @@ import EditRecipe from './NewRecipeForm/EditRecipe'
 function Main () {
 
     const [searchParams, setSearchParams] = useSearchParams();
-    // useEffect(()=>{
-    //     console.log(searchParams.get("userId"))
-    // },[searchParams])
     // const {userId} = searchParams.get("userId")
+    // const userId = 
+    // const [userId, setUserId] = useSearchParams(localStorage.getItem("userId"));
     return (
         <div>
             <Header/>
