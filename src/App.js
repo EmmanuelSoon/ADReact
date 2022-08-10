@@ -10,7 +10,7 @@ function App() {
   const { token, setToken } = useToken();
   const {id, userhash, passhash} = useParams()
 
-  console.log(id)
+  //console.log(id)
 
   // if(!token){
   //   return <Login setToken={setToken}/>

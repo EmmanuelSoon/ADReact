@@ -8,8 +8,8 @@ import Procedure from './Procedure'
 export default function NewRecipe(props) {
 
     let navigate = useNavigate();
-    const userId = localStorage.getItem("userId")
-
+    // const userId = 
+    const [userId, setUserId] = useState(localStorage.getItem("userId"))
     const [name, setName] = useState('')
     const[portion, setPortion] = useState(1)
     const[imageDataURL, setImageDataURL] = useState(null)
@@ -34,8 +34,8 @@ export default function NewRecipe(props) {
         vitaminK:0,
         servingSize:0
     })
-
     useEffect(() =>{
+        console.log("effect")
         updateNutritionData()
         if(!userId){
             navigate("/login", {replace:true})
@@ -142,20 +142,21 @@ export default function NewRecipe(props) {
     }
     const weightIngredientsList = weightIngredients.map((weightIngredient, index) => {
         return(
-                <tr key={weightIngredient.ingredient.id}>
-                    <td>
-                        {weightIngredient.ingredient.name}
-                    </td>
-                    <td>
-                        <input type="number" value={weightIngredient.weight} onChange={(event) => handleChange(event.target.value,weightIngredient.ingredient.id)}/>
-                    </td>
-                    <td>
-                        <input type="button" value="delete" className='btn btn-danger' onClick={() => deleteAddIngredient(weightIngredient.ingredient.id)}/>
-                    </td>
-                </tr>
+            <tr key={weightIngredient.ingredient.id}>
+                <td>
+                    {weightIngredient.ingredient.name}
+                </td>
+                <td>
+                    <input type="number" value={weightIngredient.weight} onChange={(event) => handleChange(event.target.value,weightIngredient.ingredient.id)}/>
+                </td>
+                <td>
+                    <input type="button" value="delete" className='btn btn-danger' onClick={() => deleteAddIngredient(weightIngredient.ingredient.id)}/>
+                </td>
+            </tr>
         )
     })
     const fullNutritionInfo = () => {
+        console.log("full")
         return (
             <div>
                 <table className='table'>
@@ -183,6 +184,7 @@ export default function NewRecipe(props) {
         )
     }
     const mainNutritionInfo = () => {
+        console.log("main")
         return(
             <div>
                 <div className='col-12'>
@@ -226,18 +228,11 @@ export default function NewRecipe(props) {
     })
 
     const imageHandler = e  => {
+        
         //console.log(e.target.value)
         if (e.target.value.length === 0){
             return
         }
-        // const reader = new FileReader()
-        // console.log(event.target.files[0])
-        // reader.readAsDataURL(event.target.files[0])
-        // reader.addEventListener("load", () =>{
-        //     console.log(reader.result)
-        //     document.getElementById("upload-image").src = reader.result
-        //     document.getElementById("upload-image").display = true
-        // })
         var canvas = document.getElementById('imageCanvas');
         var ctx = canvas.getContext('2d');
         var reader = new FileReader();
@@ -259,6 +254,8 @@ export default function NewRecipe(props) {
         }
     }
      const handleSubmit = async (event) => {
+        console.log("submit")
+        console.log(event)
         event.preventDefault();
         const formData = {
             name:name,
@@ -278,15 +275,14 @@ export default function NewRecipe(props) {
         });
         navigate("/")
     }
-
     // if (!userId) {
     //     // return <div>{user.name} is loggged in</div>;
     //     navigate("/Login", { replace: true });
     // }
   return (
     <div className='container mt-2 mb-2'>
-        <ModalForNutrition show = {show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
-        <form method='post' onSubmit={handleSubmit}>
+        <ModalForNutrition show={show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
+        {/* <form method='post' onSubmit={handleSubmit}> */}
         <h2>Create Your Recipe!</h2>
         <div className='row mt-2 mb-2'>
             <div className='col-12'>
@@ -353,7 +349,8 @@ export default function NewRecipe(props) {
         
         <div className='row'>
             <div className='col-12 ms-auto text-right'>
-                <button className='btn btn-primary float-end' type='submit'>Submit Recipe</button>
+                {/* <button className='btn btn-primary float-end' type='submit'>Submit Recipe</button> */}
+                <button className='btn btn-primary float-end' onClick={handleSubmit}>Submit Recipe</button> 
             </div>
         </div>
         <div className='row'>
@@ -361,7 +358,7 @@ export default function NewRecipe(props) {
                 <canvas id="imageCanvas"></canvas>
             </div>
         </div>   
-       </form>
+       {/* </form> */}
     </div>
   )
 }

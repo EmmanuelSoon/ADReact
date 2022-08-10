@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Image } from 'react-bootstrap';
 import { useParams, useLocation, Link } from 'react-router-dom';
-
+import StarRating from './StarRating/RatingForm.jsx';
+import CommentList from './CommentList/CommentList';
+import ModalForRating from './StarRating/ModalForRating.jsx';
+import ModalForReport from './NewReportForm/ModalForReport.jsx';
  function Recipe(props){
-
+    //id here is recipe id
     let {id} = useParams();
     const emptyRecipe = {
         id: 0,
@@ -18,6 +21,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 
     const userId = localStorage.getItem("userId")
     const [recipe, setRecipe] = useState(emptyRecipe);
+    const [comments, setComments] = useState([]);
     const [isUser, setIsUser] = useState(false);
     const [nutritions, setNutritions] = useState({
         id: 0,
@@ -39,13 +43,21 @@ import { useParams, useLocation, Link } from 'react-router-dom';
         vitaminK:0,
         servingSize:0
     })
-
+    const[showReportForm, setReportForm] = useState(false)
+    const[showCommentForm, setCommentForm] = useState(false)
     useEffect(() => {
         fetch(`/recipe/${id}`)
         .then(response => response.json())
         .then(data => {
             // console.log(data)
             setRecipe(data)
+        })
+
+        fetch(`/comment/recipe/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data)
+            setComments(data)
         })
     }, [])
 
@@ -61,7 +73,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
         }
     }
 
-    const showEditButton = () => {
+    const showButtons = () => {
         if(isUser){
             return (
                 <Link to ={"/recipe/edit/" + recipe.id} state={{userId: userId}}>
@@ -69,10 +81,13 @@ import { useParams, useLocation, Link } from 'react-router-dom';
                 </Link>
             )
         }        
-
         else{
-            return <button className='btn btn-primary'>Add rating</button>
-
+            return (
+                <div>
+                    <button className='btn btn-primary' onClick={() => setCommentForm(true)}>Add Review</button>
+                    <button className='btn btn-danger' onClick={() => setReportForm(true)}>Report</button>
+                </div>
+            )
         }
     }
 
@@ -121,7 +136,9 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 
     return (
         <div className='container'>
-
+            <ModalForRating show={showCommentForm} setShow={setCommentForm} recipeId={id} userId={parseInt(userId)}/>
+            <ModalForReport show={showReportForm} setShow={setReportForm} recipeId={id} 
+                            userId={parseInt(userId)} recipeName={recipe.name}/>
         <div className="row mt-5 mb-5" >
             <div className="col-12 col-md-8">
                 <div className="my-5">
@@ -136,14 +153,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 
             <div className="col-12 col-md-4">
                         <div className="text-right my-5">
-                            <div className="ratings">
-                                <i className="fa fa-star" aria-hidden="true"></i>
-                                <i className="fa fa-star" aria-hidden="true"></i>
-                                <i className="fa fa-star" aria-hidden="true"></i>
-                                <i className="fa fa-star" aria-hidden="true"></i>
-                                <i className="fa fa-star-o" aria-hidden="true"></i>
-                            </div>
-                            {showEditButton()}
+                            {showButtons()}
                         </div>
                     </div>
         </div>
@@ -179,8 +189,16 @@ import { useParams, useLocation, Link } from 'react-router-dom';
                         {steps}
                     </div>
                 </div>
-
             </div>
+            <div className='row d-flex justify-content-center mt-1 pb-5 px-5'>
+                <div className='col-12 col-md-9 border p-3'>
+                    <h2 className= "mb-3">Users Reviews</h2>
+                    <div>
+                        <CommentList comments={comments}/>
+                    </div>
+                </div>
+            </div>
+
         </div>
       </div>
 
