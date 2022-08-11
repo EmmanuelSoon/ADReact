@@ -51,10 +51,10 @@ export default function ModalForRating(props) {
                 <Modal.Body>
                     <div>
                         <div className='row'>
-                            <div className='col-10'>
+                            <div className='col-9'>
                                 Tell us your rating!
                             </div>
-                            <div className='col-2'>
+                            <div className='col-3'>
                                 <button onClick={handleReset} className="btn btn-primary">Reset</button>
                             </div>
                         </div>
