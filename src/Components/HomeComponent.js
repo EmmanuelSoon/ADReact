@@ -1,21 +1,44 @@
 import React, {useEffect, useState} from 'react';
 import { Card, Button, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import RecipeSearch from './RecipeSearchComponent';
 function Home (props) {
 
-const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([]);
+    const [searchContent, setSearchContent] = useState('')
+    //define whether it is first time loading the page
+    const [flag, setFlag] = useState(true)
     // works like componentDidMount
     useEffect(() => {
         // fetch data from db
-        fetch('/recipe/all')
-        .then(response => response.json())
-        .then( data => {
-            // console.log(data)
-            setRecipes(data)
-        })
+        if (flag){
+            fetch('/recipe/all')
+            .then(response => response.json())
+            .then( data => {
+                // console.log(data)
+                setRecipes(data)
+            })
+            setFlag(false)
+        } 
     }, [])
-
+    const handleSearch = () => {
+        const keyword = searchContent.trim()
+        console.log(keyword)
+        if (keyword.length > 0) {
+            fetch(`/recipe/search/${keyword}`)
+            .then(response => response.json())
+            .then( data => {
+                setRecipes(data)
+            })
+        }
+        else {
+            fetch('/recipe/all')
+            .then(response => response.json())
+            .then( data => {
+                setRecipes(data)
+            })
+        }
+    }
 
     const recipelist = recipes.map(recipe => {
         return (
@@ -38,15 +61,14 @@ const [recipes, setRecipes] = useState([]);
             </div>
         )
     })
-
     return (
         <div className='col-10 offset-1'>
             <h1 className='display-3 mt-3 mb-3'>Recipes</h1>
+            <RecipeSearch setSearchContent={setSearchContent} searchContent={searchContent} handleSearch={handleSearch}/>
             <Row sm={1} md={3} className="g-3">
-                {recipelist}
+                {recipes.length !== 0 ? recipelist : <div>There is no result found!</div>}
             </Row>
         </div>
     );
 }
-
 export default Home;
