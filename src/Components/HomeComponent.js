@@ -17,7 +17,7 @@ const [recipes, setRecipes] = useState([]);
     }, [])
 
 
-    const recipelist = recipes.map(recipe => {
+    const recipelist = recipes.filter(r => r.flagged === false).map(recipe => {
         return (
             <div>
                 <Card key={recipe.id}>
