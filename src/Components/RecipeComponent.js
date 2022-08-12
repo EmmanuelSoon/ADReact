@@ -64,7 +64,10 @@ import ModalForReport from './NewReportForm/ModalForReport.jsx';
 
     useEffect(() =>{
         updateNutritionData()
-        setIsUser(recipe.user.id == userId)
+
+        if(recipe.user !== null){
+            setIsUser(recipe.user.id == userId)
+        }
     },[recipe])
 
     const updateNutritionData = () => {
