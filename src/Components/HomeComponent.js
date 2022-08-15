@@ -40,7 +40,7 @@ function Home (props) {
         }
     }
 
-    const recipelist = recipes.map(recipe => {
+    const recipelist = recipes.filter(r => r.flagged === false).map(recipe => {
         return (
             <div>
                 <Card key={recipe.id}>
@@ -49,7 +49,7 @@ function Home (props) {
                     <Card.Body>
                         <Card.Title className='lead'><strong>{recipe.name}</strong></Card.Title>
                         <Card.Text className='lead'>
-                            Created By: {recipe.user.name}<span className='float-end text-muted'>{recipe.dateTime.slice(0,10)}</span><br/>
+                            Created By: {recipe.user != null ? recipe.user.name : "NULL"}<span className='float-end text-muted'>{recipe.dateTime.slice(0,10)}</span><br/>
                             Number of Steps: {recipe.procedures.length} <br/> 
                             {parseFloat(recipe.calPerServing).toFixed(0)} calories Per Serving! 
                         </Card.Text>
