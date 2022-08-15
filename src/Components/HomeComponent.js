@@ -6,6 +6,7 @@ function Home (props) {
 
     const [recipes, setRecipes] = useState([]);
     const [searchContent, setSearchContent] = useState('')
+    const [calories, setCalories] = useState(1500)
     //define whether it is first time loading the page
     const [flag, setFlag] = useState(true)
     // works like componentDidMount
@@ -23,9 +24,8 @@ function Home (props) {
     }, [])
     const handleSearch = () => {
         const keyword = searchContent.trim()
-        console.log(keyword)
         if (keyword.length > 0) {
-            fetch(`/recipe/search/${keyword}`)
+            fetch(`/recipe/search/${keyword}/${calories}`)
             .then(response => response.json())
             .then( data => {
                 setRecipes(data)
@@ -64,7 +64,8 @@ function Home (props) {
     return (
         <div className='col-10 offset-1'>
             <h1 className='display-3 mt-3 mb-3'>Recipes</h1>
-            <RecipeSearch setSearchContent={setSearchContent} searchContent={searchContent} handleSearch={handleSearch}/>
+            <RecipeSearch setSearchContent={setSearchContent} searchContent={searchContent} 
+                        handleSearch={handleSearch} calories={calories} setCalories={setCalories}/>
             <Row sm={1} md={3} className="g-3">
                 {recipes.length !== 0 ? recipelist : <div>There is no result found!</div>}
             </Row>
