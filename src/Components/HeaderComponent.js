@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {Navbar,  Nav, Button, Container} from 'react-bootstrap';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-
-
+import Logout from './Logout/Logout';
 
 function handleLogOut(){
     localStorage.clear();
@@ -11,8 +10,7 @@ function handleLogOut(){
 }
 
 function Header(){
-
-
+    const userId = localStorage.getItem("userId")
     return(
         <React.Fragment>
                 <Navbar variant = "light" expand="md" collapseOnSelect className='border-bottom'> 
@@ -32,7 +30,7 @@ function Header(){
                                 <NavLink className="nav-link" to={'/recipe/new'}>Add new Recipe</NavLink>
                         </Nav>
                         <Nav>
-                            <NavLink className="nav-link" to={'/logout'}>Logout</NavLink>
+                            <NavLink className="nav-link" to={'/logout'}>{userId == null? 'Login' : 'Logout'}</NavLink>
                         </Nav>
                         </Navbar.Collapse>
                     </Container>

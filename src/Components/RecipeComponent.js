@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Image } from 'react-bootstrap';
-import { useParams, useLocation, Link } from 'react-router-dom';
-import StarRating from './StarRating/RatingForm.jsx';
+import { useParams, useLocation, Link ,useNavigate } from 'react-router-dom';
 import CommentList from './CommentList/CommentList';
 import ModalForRating from './StarRating/ModalForRating.jsx';
 import ModalForReport from './NewReportForm/ModalForReport.jsx';
  function Recipe(props){
     //id here is recipe id
     let {id} = useParams();
+    let navigate = useNavigate()
     const emptyRecipe = {
         id: 0,
         image: '',
@@ -52,7 +52,6 @@ import ModalForReport from './NewReportForm/ModalForReport.jsx';
             // console.log(data)
             setRecipe(data)
         })
-
         fetch(`/comment/recipe/${id}`)
         .then(response => response.json())
         .then(data => {
@@ -64,7 +63,6 @@ import ModalForReport from './NewReportForm/ModalForReport.jsx';
 
     useEffect(() =>{
         updateNutritionData()
-
         if(recipe.user !== null){
             setIsUser(recipe.user.id == userId)
         }
@@ -87,8 +85,8 @@ import ModalForReport from './NewReportForm/ModalForReport.jsx';
         else{
             return (
                 <div>
-                    <button className='btn btn-primary' onClick={() => setCommentForm(true)}>Add Review</button>
-                    <button className='btn btn-danger' onClick={() => setReportForm(true)}>Report</button>
+                    <button className='btn btn-primary' onClick={() => userId == null ? navigate('/login') : setCommentForm(true)}>Add Review</button>
+                    <button className='btn btn-danger' onClick={() => userId == null ? navigate('/login') : setReportForm(true)}>Report</button>
                 </div>
             )
         }
@@ -136,7 +134,6 @@ import ModalForReport from './NewReportForm/ModalForReport.jsx';
             </div>
         )
     })
-
     return (
         <div className='container'>
             <ModalForRating show={showCommentForm} setShow={setCommentForm} recipeId={id} userId={parseInt(userId)}/>
