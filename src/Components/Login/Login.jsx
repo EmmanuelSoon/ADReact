@@ -8,8 +8,6 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [userId, setUserId] = useState(null)
     const [errorMsg, setErrorMsg] = useState("")
-
-
     const handleSubmit = async e => {
         e.preventDefault();
         const userInput={
@@ -74,7 +72,11 @@ export default function Login() {
                         <div className="text-center">
                             <button type="submit" className="btn btn-primary px-5 w-100">Login</button>
                         </div>
+                        <div className="text-center mt-5">
+                            <a href="/">continue to view recipes without login</a>
+                        </div>
                     </form>
+                    
                     </div>
                 </div>
             </div>
