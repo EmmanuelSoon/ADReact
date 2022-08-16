@@ -32,7 +32,7 @@ function Home (props) {
             })
         }
         else {
-            fetch('/recipe/all')
+            fetch(`/recipe/search/${calories}`)
             .then(response => response.json())
             .then( data => {
                 setRecipes(data)
