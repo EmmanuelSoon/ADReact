@@ -25,11 +25,11 @@ export default function LoginWithData() {
             if(res.ok){
               let data = await res.json()
               localStorage.setItem('userId', data.id)
-          }
+            }
             else{
-                    //bring user to login page
-                    //let them manually input the username and password
-                    navigate("/login", { replace: true });
+              //bring user to login page
+              //let them manually input the username and password
+              navigate("/login", { replace: true });
             }
           })
         .then(navigate("/recipes", { replace: true }))

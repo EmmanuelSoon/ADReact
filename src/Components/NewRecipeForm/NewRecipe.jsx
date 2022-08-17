@@ -147,7 +147,8 @@ export default function NewRecipe(props) {
                     {weightIngredient.ingredient.name}
                 </td>
                 <td>
-                    <input type="number" value={weightIngredient.weight} onChange={(event) => handleChange(event.target.value,weightIngredient.ingredient.id)}/>
+                    <input type="number" value={weightIngredient.weight} className='w-50'
+                        onChange={(event) => handleChange(event.target.value,weightIngredient.ingredient.id)}/>
                 </td>
                 <td>
                     <input type="button" value="delete" className='btn btn-danger' onClick={() => deleteAddIngredient(weightIngredient.ingredient.id)}/>
