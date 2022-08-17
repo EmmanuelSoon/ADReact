@@ -57,7 +57,7 @@ export default function Login() {
                     <div className="card my-3">
                     <form className="card-body cardbody-color p-lg-5" onSubmit={handleSubmit} method="post">
                         <div className="text-center mb-5">
-                            <img src={process.env.PUBLIC_URL + '/asset/images/placeholder.jpg'} className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                            <img src={process.env.PUBLIC_URL + '/asset/images/logo.png'} className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                                 width="200px" alt="profile"/>
                         </div>
                         <div className="mb-3">
