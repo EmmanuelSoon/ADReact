@@ -26,14 +26,13 @@ function Main () {
                     <Route path="/recipes/:id" element={<Recipe userId={searchParams.get("userId")}/>} /> 
                     <Route path="/recipe/edit/:id" element={<EditRecipe userId={searchParams.get("userId")}/>} />
                     <Route path='/recipe/new' element={<NewRecipe />} />
-                    <Route path="/android/:id/:userhash/:passhash" element={<LoginWithData />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="*" element= {<Navigate to="/" replace />} /> 
                 </Route>
                 <Route element={<WithoutNav />}>
                     <Route path='/login' element={<Login />} />
+                    <Route path="/android/:id/:userhash/:passhash" element={<LoginWithData />} />
                 </Route>
-
             </Routes>
         </div>
     )

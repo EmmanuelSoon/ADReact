@@ -207,7 +207,7 @@ export default function NewRecipe(props) {
                         </tbody>
                     </table>
                 </div>
-                <div className='col-6 ms-auto'>
+                <div className='col-12 col-md-6 ms-auto'>
                     <button className='btn btn-primary float-end' onClick={() => {setShow(true)}}>Full Nutritional Information</button>
                 </div>    
             </div>
@@ -221,7 +221,7 @@ export default function NewRecipe(props) {
                     <p className='word'>{procedure}</p>
                 </div>
                 <div className='col-3'>
-                    <button className='btn btn-danger' onClick={() => deleteProcedure(index)}>remove</button>
+                    <button className='btn btn-danger float-end' onClick={() => deleteProcedure(index)}>remove</button>
                 </div>
             </div>
 
@@ -255,8 +255,6 @@ export default function NewRecipe(props) {
         }
     }
      const handleSubmit = async (event) => {
-        console.log("submit")
-        console.log(event)
         event.preventDefault();
         const formData = {
             name:name,
@@ -276,10 +274,10 @@ export default function NewRecipe(props) {
         });
         navigate("/")
     }
-    // if (!userId) {
-    //     // return <div>{user.name} is loggged in</div>;
-    //     navigate("/Login", { replace: true });
-    // }
+
+    const checkFormComplete = () => {
+        return name.length === 0 || weightIngredients.length === 0 || procedures.length === 0
+    }
   return (
     <div className='container mt-2 mb-2'>
         <ModalForNutrition show={show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
@@ -319,13 +317,7 @@ export default function NewRecipe(props) {
                 <h2>Recipe Procedures</h2>
             </div>
         </div>
-        <div className='row'>
-            <div className='col-12'>
-                <ul>
-                    {storedProcedures}
-                </ul>
-            </div>
-        </div>
+            {storedProcedures}
         <div className='row'>
             <div className='col-12'>
                 <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
@@ -350,8 +342,7 @@ export default function NewRecipe(props) {
         
         <div className='row'>
             <div className='col-12 ms-auto text-right'>
-                {/* <button className='btn btn-primary float-end' type='submit'>Submit Recipe</button> */}
-                <button className='btn btn-primary float-end' onClick={handleSubmit}>Submit Recipe</button> 
+                <button className='btn btn-primary float-end' onClick={handleSubmit} disabled={checkFormComplete()}>Submit Recipe</button> 
             </div>
         </div>
         <div className='row'>
@@ -359,7 +350,6 @@ export default function NewRecipe(props) {
                 <canvas id="imageCanvas"></canvas>
             </div>
         </div>   
-       {/* </form> */}
     </div>
   )
 }
