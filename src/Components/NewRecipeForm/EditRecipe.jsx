@@ -189,7 +189,7 @@ export default function EditRecipe(props) {
                         {weightIngredient.ingredient.name}
                     </td>
                     <td>
-                        <input type="number" value={weightIngredient.weight} onChange={(event) => handleChange(event.target.value,weightIngredient.ingredient.id)}/>
+                        <input type="number" className='w-50' value={weightIngredient.weight} onChange={(event) => handleChange(event.target.value,weightIngredient.ingredient.id)}/>
                     </td>
                     <td>
                         <input type="button" value="delete" className='btn btn-danger' onClick={() => deleteAddIngredient(weightIngredient.ingredient.id)}/>
@@ -229,10 +229,10 @@ export default function EditRecipe(props) {
     const mainNutritionInfo = () => {
         return(
             <div>
-                <div className='row'>
+                <div className='col-12'>
                     <p className='mt-2'><strong><u>Serving Weight: {nutritions.servingSize} g</u></strong></p>
                 </div>
-                <div className='row'>
+                <div className='col-12'>
                     <table className='table'>
                         <thead><tr><th>Nutritional Info</th><th>Value</th></tr></thead>
                         <tbody>
@@ -364,18 +364,17 @@ export default function EditRecipe(props) {
                     <h2>Recipe Procedures</h2>
                 </div>
             </div>
-            <div className='row'>
-                <div className='col-12'>
-                    <ul>
-                        {storedProcedures}
-                    </ul>
-                </div>
+        <div className='row'>
+            <div className='col-12'>
+                <h2>Recipe Procedures</h2>
             </div>
-            <div className='row'>
-                <div className='col-12'>
-                    <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
-                </div>
+        </div>
+            {storedProcedures}
+        <div className='row'>
+            <div className='col-12'>
+                <Procedure addProcedure={addProcedure} deleteProcedure={deleteProcedure}/>
             </div>
+        </div>
             <div className='row mt-4 mb-4'>
                 <div className='col-12 col-sm-3'>
                     <h4>Select Number of Servings:</h4>
