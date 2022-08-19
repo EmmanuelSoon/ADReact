@@ -15,12 +15,12 @@ export default function RecipeSearchComponent(props) {
             </div>
             <div className='col-6 col-md-2 mt-2'>
                 <button type="button" className="btn btn-primary" style={{width:'100%'}} onClick={handleSearch}>
-                    <i className="fa fa-search"> Search</i>
+                    <i className="fa fa-search"></i><span> Search</span>
                 </button>
             </div>
             <div className='col-6 col-md-2 mt-2'>
                 <button className='btn btn-primary' style={{width:'100%'}} onClick={() => filterRef.current.style.display='flex'}>
-                <i className="fa fa-filter"> Max. Calories</i>
+                <i className="fa fa-filter"></i><span> Max. Calories</span>
                 </button>
             </div>
             <div style={{display:'none'}} ref={filterRef} className='row mt-2'>   
