@@ -246,8 +246,8 @@ export default function EditRecipe(props) {
                         </tbody>
                     </table>
                 </div>
-                <div className='row col-6 ms-auto'>
-                    <button className='btn btn-primary' onClick={() => {setShow(true)}}>Full Nutritional Information</button>
+                <div className='col-12 col-md-6 ms-auto'>
+                    <button className='btn btn-primary float-end' onClick={() => {setShow(true)}}>Full Nutritional Information</button>
                 </div>    
             </div>
         )
@@ -261,7 +261,7 @@ export default function EditRecipe(props) {
                     <p className='word'>{procedure}</p>
                 </div>
                 <div className='col-3'>
-                    <button className='btn btn-danger' onClick={() => deleteProcedure(index)}>remove</button>
+                    <button className='btn btn-danger float-end' onClick={() => deleteProcedure(index)}>remove</button>
                 </div>
             </div>
 
@@ -323,12 +323,10 @@ export default function EditRecipe(props) {
         // navigate("/", {replace:true})
     }
 
-
-
     return (
         <div className='container mt-2 mb-2'>
         <ModalForNutrition show = {show} setShow={setShow} fullNutritionInfo = {fullNutritionInfo()}/>
-        <form method='post' onSubmit={handleSubmit}>
+        {/* <form method='post' onSubmit={handleSubmit}> */}
             <h2>Edit Your Recipe!</h2>
             <div className='row mt-2 mb-2'>
                 <div className='col-12'>
@@ -394,7 +392,7 @@ export default function EditRecipe(props) {
             
             <div className='row'>
                 <div className='col-12 ms-auto text-right'>
-                    <button className='btn btn-primary float-end' type='submit'>Submit Recipe</button>
+                    <button className='btn btn-primary float-end' type='submit' onClick={handleSubmit}>Update Recipe</button>
                 </div>
             </div>
             <div className='row'>
@@ -402,7 +400,7 @@ export default function EditRecipe(props) {
                     <canvas id="imageCanvas"></canvas>
                 </div>
             </div>   
-       </form>
+       {/* </form> */}
     </div>
   )
 }
