@@ -25,6 +25,7 @@ export default function LoginWithData() {
             if(res.ok){
               let data = await res.json()
               localStorage.setItem('userId', data.id)
+              navigate("/", { replace: true })
             }
             else{
               //bring user to login page
@@ -32,7 +33,6 @@ export default function LoginWithData() {
               navigate("/login", { replace: true });
             }
           })
-        .then(navigate("/recipes", { replace: true }))
       }, []);
 
   return (
